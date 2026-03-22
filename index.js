@@ -13,18 +13,31 @@ async function movieSearch() {
                 const movieData = await movieDetail.json()
                 console.log(movieData)
                 const movieHTML = `
-                <img src="${movieData.Poster}"/>
-                <h3>${movieData.Title}</h3>
-                <p>${movieData.imbdRating}</p>
-                <p>${movieData.Runtime}</p>
-                <p>${movieData.Genre}</p>
-                <p>${movieData.Plot}</p>
-                `   
+                    <div class="movie-card">
+                        <img src="${movieData.Poster}" class="movie-poster" />
+                        <div class="movie-info">
+                            <div class="movie-header">
+                                <h3>${movieData.Title}</h3>
+                                <span class="rating">⭐️ ${movieData.imdbRating}</span>
+                            </div>
+                            <div class="movie-metadata">
+                                <span>${movieData.Runtime}</span>
+                                <span>${movieData.Genre}</span>
+                                <button class="watchlist-btn">
+                                <img src="image/icon.png" class="plus-icon" />
+                                Watchlist
+                                </button>
+                            </div>
+                                <p class="moive-plot">${movieData.Plot}</p>
+                        </div>
+                    </div>
+                    <hr>
+                ` 
                 movieContainer.innerHTML += movieHTML
             } 
         } else {
             movieContainer.innerHTML = `
-            <p class=errorMessage>Unable to find what you are looking for. Please try valid movie name.</p>
+            <p class="errorMessage">Unable to find what you are looking for. Please try valid movie name.</p>
             `
         }
     }

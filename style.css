@@ -13,6 +13,19 @@ body {
     background-size: contain;
 }
 
+nav a{
+    text-decoration: none;
+    color: azure;
+}
+
+nav a:visited {
+    color: azure;
+}
+
+nav a:hover {
+    color: #cfcaca;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -22,10 +35,16 @@ body {
     padding-right: 150px;
 }
 
+.main-container {
+    width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 .search {
     display: flex;
     justify-content: center;
-    margin-top: -25px;
+    margin-top: -50px;
 }
 
 .search-input,
@@ -88,8 +107,59 @@ body {
     font-size: larger;
     font-weight: 700;
     align-items: center;
+    text-align: center;
     filter: invert(0.4);
     width: 40%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+}
+
+.movie-container {
+    width: 100%;
+}
+
+.movie-card {
+    display: flex;
+}
+
+.movie-poster {
+    width: 150px;
+    height: 200px;
+}
+
+.movie-info {
+    padding-left: 20px;
+}
+
+.movie-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.movie-metadata {
+    display: flex;
+    gap: 20px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #9b9d9f;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.watchlist-btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    color: azure;
+}
+
+.plus-icon {
+    width: 16px;
+    height: 16px;
 }
