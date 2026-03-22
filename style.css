@@ -163,3 +163,19 @@ hr {
     width: 16px;
     height: 16px;
 }
+
+.empty-watchlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.watchlist-link {
+    color: azure;
+    font-weight: 800;
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
