@@ -159,6 +159,19 @@ hr {
     color: azure;
 }
 
+.added-btn {
+    display: flex;
+    align-items: center;
+    cursor: not-allowed;
+    gap: 5px;
+    background: rgb(67, 198, 67);
+    border: none;
+    border-radius: 3px;
+    font-family: inherit;
+    font-weight: 600;
+    color: azure;
+}
+
 .plus-icon {
     width: 16px;
     height: 16px;
@@ -178,4 +191,33 @@ hr {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-state i {
+    font-size: 50px;
+    padding: 100px;
+}
+
+.loading-state p {
+    font-size: 18px;
+    font-weight: 400px;
+}
+
+.remove-watchlist-btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    font-family: inherit;
+    color: azure;
 }

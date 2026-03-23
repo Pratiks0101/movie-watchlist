@@ -34,7 +34,7 @@ async function renderWatchlist() {
                             <div class="movie-metadata">
                                 <span>${moviesData.Runtime}</span>
                                 <span>${moviesData.Genre}</span>
-                                <button class="watchlist-btn" onClick="removeFromWatchlist('${moviesData.imdbID}')">
+                                <button class="remove-watchlist-btn" onClick="removeFromWatchlist('${moviesData.imdbID}')">
                                 <img src="image/icon1.png" class="plus-icon" />
                                 Remove
                                 </button>

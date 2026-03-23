@@ -1,4 +1,5 @@
 const search = document.getElementById("search-btn")
+const searchInput = document.getElementById("search-input")
 const movieContainer = document.getElementById("movie-container")
 
 let savedMovie
@@ -10,16 +11,26 @@ let savedMovie
 
 async function movieSearch() {
     let searchInput = document.getElementById("search-input").value
+    document.getElementById('placeholder').style.display = 'none'
+    movieContainer.innerHTML = `
+    <div class="loading-state">
+        <i class="fa-solid fa-spinner fa-spin-pulse" 
+        style="color: hsl(0, 0%, 100%);"></i>
+        <p>Searching for Movie...</p>`
     const response = await fetch(`https://www.omdbapi.com/?s=${searchInput}&apikey=6a034881`)
     const data = await response.json()
-        document.getElementById('placeholder').style.display = 'none'
-        movieContainer.innerHTML = ""
         let searchResult = ""
         if (data.Search){
             for (const movie of data.Search) {
                 const movieDetail = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=6a034881`)
                 const movieData = await movieDetail.json()
-                console.log(movieData)
+                // console.log(movieData)
+
+                const isAdded = savedMovie.includes(movieData.imdbID)
+                const buttonText = isAdded ? "Added" : "Watchlist"
+                const buttonImage = isAdded ? "image/circle-check.png" : "image/icon.png"
+                const buttonFunction = isAdded ? "" : "addToWatchlist"
+                const buttonClass = isAdded ? "added-btn disabled" : "watchlist-btn"
                 const movieHTML = `
                     <div class="movie-card">
                         <img src="${movieData.Poster}" class="movie-poster" />
@@ -31,9 +42,9 @@ async function movieSearch() {
                             <div class="movie-metadata">
                                 <span>${movieData.Runtime}</span>
                                 <span>${movieData.Genre}</span>
-                                <button class="watchlist-btn" onClick="addToWatchlist('${movieData.imdbID}')">
-                                <img src="image/icon.png" class="plus-icon" />
-                                Watchlist
+                                <button class=${buttonClass} onClick="${buttonFunction}(event, '${movieData.imdbID}')">
+                                <img src="${buttonImage}" class="plus-icon" />
+                                ${buttonText}
                                 </button>
                             </div>
                                 <p class="moive-plot">${movieData.Plot}</p>
@@ -53,10 +64,23 @@ async function movieSearch() {
 
 search.addEventListener('click', movieSearch)
 
-window.addToWatchlist = function(id) {
+searchInput.addEventListener('keypress', function(e) {
+    if(e.key === "Enter") {
+        e.preventDefault()
+        movieSearch()
+    }
+})
+
+
+window.addToWatchlist = function(event, id) {
     if(!savedMovie.includes(id)){
         savedMovie.push(id)
         localStorage.setItem("watchlist", JSON.stringify(savedMovie))
-        console.log(id)
+        // console.log(id)
     }
+    const clickedBtn = event.currentTarget
+    clickedBtn.innerHTML = `<img src="image/circle-check.png" class="plus-icon" />  Added`
+    clickedBtn.classList.add("added-btn", "disabled")
+    clickedBtn.disabled = true
+    clickedBtn.onclick = null
 }
