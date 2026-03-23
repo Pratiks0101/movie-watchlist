@@ -1,7 +1,12 @@
 let watchlistContainer = document.getElementById("watchlist-container")
 let savedMovie = JSON.parse(localStorage.getItem("watchlist")) || []
 
-if (savedMovie.length === 0) {
+
+renderWatchlist()
+
+
+async function renderWatchlist() {
+    if (savedMovie.length === 0) {
     watchlistContainer.innerHTML = `
     <div class="empty-watchlist">
     <p class="errorMessage">Your watchlist is looking little empty...</p>
@@ -11,8 +16,8 @@ if (savedMovie.length === 0) {
     
     </div>
     `
-} else {
-    async function rendorWatchlist() {
+    return
+}else{
         let watchlistMoviesHTML = ""
         for (let id of savedMovie) {
             const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=6a034881`)
@@ -41,14 +46,12 @@ if (savedMovie.length === 0) {
             `
             watchlistMoviesHTML += moviesHTML
         }
-        watchlistContainer.innerHTML += watchlistMoviesHTML
+        watchlistContainer.innerHTML = watchlistMoviesHTML
     }
-    rendorWatchlist()
 }
-
-
 window.removeFromWatchlist = function (id) {
-    savedMovie.pop(id)
+    savedMovie = savedMovie.filter(movieId => movieId !== id)
     localStorage.setItem("watchlist", JSON.stringify(savedMovie))
     console.log(id)
-}
+    renderWatchlist()
+}   

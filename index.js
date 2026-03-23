@@ -43,7 +43,7 @@ async function movieSearch() {
                 ` 
                 searchResult += movieHTML
             } 
-            movieContainer.innerHTML += searchResult
+            movieContainer.innerHTML = searchResult
         } else {
             movieContainer.innerHTML = `
             <p class="errorMessage">Unable to find what you are looking for. Please try valid movie name.</p>
